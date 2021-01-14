@@ -10,7 +10,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @recipe.recipe_ingredients.build.build_ingredient
+    10.times { @recipe.recipe_ingredients.build.build_ingredient }
   end
 
   def create
