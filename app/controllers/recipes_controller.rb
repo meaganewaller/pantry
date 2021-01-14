@@ -10,15 +10,20 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @recipe.recipe_ingredients.build.build_ingredient
   end
 
   def create
-    @recipe = Recipe.create(recipe_params)
+    @recipe = Recipe.new(recipe_params)
 
-    if @recipe.save
-      redirect_to @recipe
-    else
-      render action: "new"
+    respond_to do |format|
+      if @recipe.save
+        format.html { redirect_to @recipe, notice: "Recipe was successfully created."}
+        format.json { render :show, status: :created, location: @recipe }
+      else
+        format.html { render :new }
+        format.json { render json: @recipe.errors, status: :unproccessable_entity }
+      end
     end
   end
 
@@ -45,6 +50,6 @@ class RecipesController < ApplicationController
 
   protected
   def recipe_params
-    params.require(:recipe).permit(:title)
+    params.require(:recipe).permit(:title, recipe_ingredients_attributes: [:amount, ingredient_attributes: [:name]])
   end
 end
