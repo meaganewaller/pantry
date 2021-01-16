@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
   end
 
-  def creates
+  def create
     @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
@@ -49,6 +49,6 @@ class RecipesController < ApplicationController
 
   protected
   def recipe_params
-    params.require(:recipe).permit(:title, recipe_ingredients_attributes: [:amount, ingredient_attributes: [:name]])
+    params.require(:recipe).permit(:title, recipe_ingredients_attributes: [:amount, :description, ingredient_attributes: [:name]])
   end
 end
