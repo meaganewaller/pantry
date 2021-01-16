@@ -4,5 +4,5 @@ class Recipe < ApplicationRecord
 
   validates_presence_of :title
 
-  accepts_nested_attributes_for :recipe_ingredients
+  accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 end
