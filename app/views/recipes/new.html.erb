@@ -23,7 +23,7 @@
       <%= render "recipe_ingredient_fields", f: recipe_ingredient_form %>
     <% end %>
     <div class='links'>
-      <%= link_to_add_association 'add ingredient', recipe_form, :recipe_ingredients %>
+      <%= link_to_add_association 'add ingredient', recipe_form, :recipe_ingredients, wrap_object: Proc.new { |recipe_ingredient| recipe_ingredient.build_ingredient; recipe_ingredient } %>
     </div>
   </div>
 
