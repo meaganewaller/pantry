@@ -12,15 +12,20 @@
     </div>
   <% end %>
 
-  <%= recipe_form.text_field :title, placeholder: "Recipe Title" %>
+  <div>
+    <%= recipe_form.label :title %>
+    <%= recipe_form.text_field :title %>
+  </div>
+
   <h2>Ingredients</h2>
-  <%= recipe_form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
-    <%= recipe_ingredient_form.text_field :amount, placeholder: "Amount" %>
-    <%= recipe_ingredient_form.fields_for :ingredient do |ingredient_form| %>
-      <%= ingredient_form.text_field :name %>
+  <div id="recipeIngredients">
+    <%= recipe_form.fields_for :recipe_ingredients do |recipe_ingredient_form| %>
+      <%= render "recipe_ingredient_fields", f: recipe_ingredient_form %>
     <% end %>
-    <br />
-  <% end %>
+    <div class='links'>
+      <%= link_to_add_association 'add ingredient', recipe_form, :recipe_ingredients %>
+    </div>
+  </div>
 
   <br />
   <%= recipe_form.submit %>
